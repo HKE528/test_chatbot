@@ -2,12 +2,13 @@ import requests
 from bs4 import BeautifulSoup
 
 class Crawler:
-    def __init__(self):
+    def __init__(self, keyword):
         self.baseURL = "https://www.kangwon.ac.kr"
+        self.URL = baseURL + keyword
 
     #html추출
-    def getHtml(self, URL):
-        html = requests.get(URL)
+    def getHtml(self):
+        html = requests.get(self.URL)
 
         return BeautifulSoup(html.content, "html.parser")
 
@@ -44,7 +45,8 @@ class Crawler:
             return False
 
     #검색결과 나온 메뉴링크 추출
-    def getMenuURL(self, soup):
+    def getMenuURL(self):
+        soup = getHtml()
         menuLink = []
 
         if(not self.srchMenuCountIsZero(soup)):   
