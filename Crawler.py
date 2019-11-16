@@ -4,11 +4,11 @@ from bs4 import BeautifulSoup
 class Crawler:
     def __init__(self, keyword):
         self.baseURL = "https://www.kangwon.ac.kr"
-        self.URL = baseURL + keyword
+        self.URL = "https://www.kangwon.ac.kr/search.do?cate=&query=" + keyword
 
     #html추출
-    def getHtml(self):
-        html = requests.get(self.URL)
+    def getHtml(self, URL):
+        html = requests.get(URL)
 
         return BeautifulSoup(html.content, "html.parser")
 
@@ -46,7 +46,7 @@ class Crawler:
 
     #검색결과 나온 메뉴링크 추출
     def getMenuURL(self):
-        soup = getHtml()
+        soup = self.getHtml(self.URL)
         menuLink = []
 
         if(not self.srchMenuCountIsZero(soup)):   
@@ -60,4 +60,4 @@ class Crawler:
             return menuLink
 
         else:
-            return '결과 없음'
+            return 0
