@@ -21,10 +21,6 @@ class Crawler:
         else:
             return False
 
-    #추출한 링크를 베이스링크와 연결하여 풀링크 반환
-    def fullURL(self, link):
-        return self.baseURL + link
-
     #링크가 저장된 리스트를 모두 풀링크로
     def listFullURL(self,links):
         List = []
@@ -57,7 +53,7 @@ class Crawler:
         
                 if(self.checkWebLanguageKo(self.fullURL(link))):
                     menuLink.append(link)
-            return menuLink
+            return listFullURL(menuLink)
 
         else:
             return 0
